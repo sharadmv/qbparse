@@ -1,5 +1,9 @@
+PIL==1.1.7
 argparse==1.2.1
+docx==0.2.0
+lxml==3.2.1
 pdfminer==20110515
+pyPdf==1.13
 pyparsing==1.5.7
 sh==1.08
 wsgiref==0.1.2
