@@ -12,7 +12,6 @@ class PDFExtractor(Extractor):
         text = ""
         for page in reader.pages:
             text += page.extractText()+"\n"
-        print(text)
         return text
 
 
