@@ -10,8 +10,8 @@ class TossupParser:
 
     ANSWER_KEYWORD = CaselessKeyword("ANSWER")
     ANSWER_DELIMITER = Regex("[: ]")
-    ANSWER_HEADER = ANSWER_KEYWORD + ANSWER_DELIMITER
-    ANSWER = ANSWER_HEADER + (SkipTo(QUESTION_PREFIX) | SkipTo(LineEnd())).setResultsName("answer")
+    ANSWER_HEADER = NotAny(QuotedString("[10]"))+ANSWER_KEYWORD + ANSWER_DELIMITER
+    ANSWER = ANSWER_HEADER + (SkipTo(LineEnd()) ^ SkipTo(QUESTION_PREFIX)).setResultsName("answer")
 
     QUESTION = Optional(ANSWER) + QUESTION_PREFIX + SkipTo(ANSWER_KEYWORD).setResultsName("question")
 
@@ -28,7 +28,7 @@ class TossupParser:
 
     def __init__(self):
         #self.grammar = SkipTo(self.TOSSUP).setResultsName("header")+OneOrMore(self.TOSSUP)
-        self.grammar = SkipTo(self.TOSSUP) + OneOrMore(self.TOSSUP | self.BONUS)
+        self.grammar = SkipTo(self.TOSSUP) + OneOrMore(self.TOSSUP)
 
 
     def parse(self, text):

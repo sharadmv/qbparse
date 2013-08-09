@@ -1,4 +1,7 @@
-from pyPdf import PdfFileReader
+import sh
+import os
+
+from sh import pdftotext
 
 from extractor import Extractor
 
@@ -8,10 +11,6 @@ class PDFExtractor(Extractor):
         pass
 
     def extract(self, document):
-        reader = PdfFileReader(file(document, "rb"))
-        text = ""
-        for page in reader.pages:
-            text += page.extractText()+"\n"
-        return text
+        return pdftotext(document, "-").encode('utf-8', 'ignore')
 
 
